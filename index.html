@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Parecer Técnico – ENNER Engenharia</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+/* ========================= */
+/* BOTÃO FLUTUANTE */
+/* ========================= */
+.download-btn {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    background: #001F32;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: 0.3s;
+    z-index: 9999;
+}
+
+.download-btn:hover {
+    background: #E87F14;
+}
+
+/* ========================= */
+/* MODAL */
+/* ========================= */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background: white;
+    padding: 35px;
+    width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #001F32;
+}
+
+.modal-content ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    background: #001F32;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modal-content button:hover {
+    background: #E87F14;
+}
+
+@media print {
+    body {
+        background: none;
+        padding: 0;
+    }
+
+    .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-after: always;
+    }
+
+    .download-btn,
+    .modal {
+        display: none !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BOTÃO -->
+<div class="download-btn" onclick="openModal()">
+📄 Baixar PDF
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2>Configuração para baixar corretamente</h2>
+        <ul>
+            <li><strong>Destino:</strong> Guardar como PDF</li>
+            <li><strong>Páginas:</strong> Todas</li>
+            <li><strong>Páginas por folha:</strong> 1</li>
+            <li><strong>Margens:</strong> Predefinidas</li>
+            <li><strong>Opções:</strong> Imagens em segundo plano ✔</li>
+            <li><strong>Escala:</strong> 100%</li>
+            <li><strong>Papel:</strong> A4</li>
+            <li>Desmarcar cabeçalhos e rodapés</li>
+        </ul>
+        <button onclick="printDocument()">Abrir impressão</button>
+    </div>
+</div>
+
+<!-- Containers das páginas -->
+<div id="page-1"></div>
+<div id="page-2"></div>
+<div id="page-3"></div>
+<div id="page-4"></div>
+<div id="page-5"></div>
+<div id="page-6"></div>
+
+<script>
+const pages = [
+    { id: "page-1", file: "page-1-capa.html" },
+    { id: "page-2", file: "page-2-objetivo-sistema.html" },
+    { id: "page-3", file: "page-3-inversor-5k.html" },
+    { id: "page-4", file: "page-4-inversor-10k.html" },
+    { id: "page-5", file: "page-5-modulos-ampliacao.html" },
+    { id: "page-6", file: "page-6-conclusao.html" }
+];
+
+pages.forEach(p => {
+    fetch(p.file)
+        .then(res => res.text())
+        .then(html => {
+            const temp = document.createElement("div");
+            temp.innerHTML = html;
+            const page = temp.querySelector(".page");
+            document.getElementById(p.id).appendChild(page);
+        });
+});
+
+/* ========================= */
+/* FUNÇÕES */
+/* ========================= */
+
+function openModal() {
+    document.getElementById("modal").style.display = "flex";
+}
+
+function printDocument() {
+    document.getElementById("modal").style.display = "none";
+    window.print();
+}
+
+</script>
+
+</body>
+</html>

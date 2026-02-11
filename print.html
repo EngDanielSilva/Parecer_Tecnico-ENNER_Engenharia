@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Pré-visualização – Parecer Técnico ENNER</title>
+
+<style>
+    body {
+        background: #e5e7eb;
+        padding: 20px;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .preview-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+
+    iframe {
+        width: 210mm;
+        height: 297mm;
+        border: none;
+        overflow: hidden;     /* 🔴 remove scroll */
+        background: white;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+</style>
+</head>
+
+<body>
+
+<div class="titulo-preview">
+    Pré-visualização do Parecer Técnico – ENNER ENGENHARIA
+</div>
+
+<div class="preview-container">
+
+    <iframe src="page-1-capa.html"></iframe>
+    <iframe src="page-2-objetivo-sistema.html"></iframe>
+    <iframe src="page-3-inversor-5k.html"></iframe>
+    <iframe src="page-4-inversor-10k.html"></iframe>
+    <iframe src="page-5-modulos-ampliacao.html"></iframe>
+    <iframe src="page-6-conclusao.html"></iframe>
+
+</div>
+
+</body>
+</html>
